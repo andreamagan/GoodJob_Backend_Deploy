@@ -130,11 +130,8 @@ async function activateAccount(verificationCode, email) {
     $set: { 'accountInfo.activatedAt': now },
   };
 
-  const activatedAccount = await PlayerModel.findOneAndUpdate(filter, update);
-  if (activatedAccount != null) {
-    return null;
-  }
-  throw new Error('Something goes wrong');
+  await PlayerModel.findOneAndUpdate(filter, update);
+  return null;
 }
 
 
