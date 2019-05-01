@@ -1,13 +1,12 @@
 {
-  "name": "backend",
+  "name": "gj-backend",
   "version": "1.0.0",
-  "description": "",
-  "main": "idex.js",
+  "description": "HAB final project",
+  "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
-  "author": "",
+  "author": "Andrea Magán Rey",
   "license": "ISC",
   "dependencies": {
     "@sendgrid/mail": "^6.3.1",
