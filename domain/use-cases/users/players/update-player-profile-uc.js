@@ -40,7 +40,7 @@ async function validate(payload) {
 
 async function updatePlayerProfile(userData, authorization) {
   const { uuid, role } = await checkAuthorization(authorization);
-  await acceptOnlyRole(role, process.env.EXPECTED_ROLE_PLAYER);
+  await acceptOnlyRole(role, 'player');
 
   await validate(userData);
 

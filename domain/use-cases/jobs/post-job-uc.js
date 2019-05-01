@@ -3,7 +3,7 @@
 const Joi = require('joi');
 
 const checkAuthorization = require('../sessions/check-jwt-token-uc');
-// const acceptOnlyRole = require('../sessions/accept-only-role-uc');
+const acceptOnlyRole = require('../sessions/accept-only-role-uc');
 
 const teamRepository = require('../../repositories/team-repository');
 const jobRepository = require('../../repositories/job-repository');
@@ -27,8 +27,7 @@ async function validate(payload) {
 
 async function postJobUC(jobInputData, authorization) {
   const { uuid, role } = await checkAuthorization(authorization);
-  // console.log(role, process.env.EXPECTED_ROLE_TEAM);
-  // await acceptOnlyRole(role, process.env.EXPECTED_ROLE_TEAM);
+  await acceptOnlyRole(role, 'team');
 
   await validate(jobInputData);
 

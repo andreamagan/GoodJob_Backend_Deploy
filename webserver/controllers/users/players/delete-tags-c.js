@@ -8,7 +8,7 @@ async function deleteTagsController(req, res, next) {
 
   try {
     await deleteTagsUC(userTags, authorization);
-    return res.status(200).send();
+    return res.status(204).send();
   } catch (e) {
     return next(e);
   }

@@ -58,7 +58,7 @@ async function getJobApplicantsUuids(jobId) {
     _id: 0,
   };
 
-  const applicantsResult = await JobModel.findOne(filter, projection).lean(); // [{ ...user1 }, { ...user2 }, ...{user n}]
+  const applicantsResult = await JobModel.findOne(filter, projection).lean();
   console.log('applicants', applicantsResult);
   const applicantsUuids = applicantsResult.applicants;
 

@@ -4,7 +4,7 @@ const Joi = require('joi');
 
 const checkAuthorization = require('../../sessions/check-jwt-token-uc');
 const teamRepository = require('../../../repositories/team-repository');
-
+const acceptOnlyRole = require('../../sessions/accept-only-role-uc');
 
 async function validate(payload) {
   const schema = {
@@ -26,7 +26,7 @@ async function validate(payload) {
 
 async function updateUserProfile(userData, authorization) {
   const { uuid, role } = await checkAuthorization(authorization);
-  await acceptOnlyRole(role, process.env.EXPECTED_ROLE_TEAM);
+  await acceptOnlyRole(role, 'team');
 
   await validate(userData);
 

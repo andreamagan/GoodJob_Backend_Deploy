@@ -7,7 +7,7 @@ const jobRepository = require('../../repositories/job-repository');
 
 async function deleteJobUC(jobId, authorization) {
   const { role } = await checkAuthorization(authorization);
-  // await acceptOnlyRole(role, process.env.EXPECTED_ROLE_TEAM);
+  await acceptOnlyRole(role, 'team');
 
   console.log('2', jobId);
   try {

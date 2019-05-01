@@ -8,7 +8,7 @@ async function addTagsController(req, res, next) {
 
   try {
     await addTagsUC(userTags, authorization);
-    return res.status(201).send();
+    return res.status(204).send();
   } catch (e) {
     return next(e);
   }

@@ -19,7 +19,7 @@ cloudinary.config({
 
 async function uploadAvatarUC(file, authorization) {
   const { uuid, role } = checkAuthorization(authorization);
-  // acceptOnlyRole(role, process.env.EXPECTED_ROLE_PLAYER);
+  acceptOnlyRole(role, 'player');
 
   try {
     const { secure_url: avatarUrl } = await new Promise((resolve, reject) => {
