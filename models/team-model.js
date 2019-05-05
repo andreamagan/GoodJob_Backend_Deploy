@@ -6,9 +6,18 @@ const { Schema } = mongoose;
 
 const teamSchema = new Schema({
   profileInfo: {
-    fullName: String,
-    nickName: String,
-    description: String,
+    fullName: {
+      type: String,
+      index: true,
+    },
+    nickName: {
+      type: String,
+      index: true,
+    },
+    description: {
+      type: String,
+      index: true,
+    },
     social: {
       twitterUrl: String,
       twitchUrl: String,
@@ -37,9 +46,8 @@ const teamSchema = new Schema({
 
 teamSchema.index(
   {
-    'profileInfo.fullname': 'text',
-    'profileInfo.nidkName': 'text',
-    'profileInfo.description': 'text',
+    'profileInfo.fullName': 'text',
+    'profileInfo.nickName': 'text',
     tags: 'text',
   },
 );

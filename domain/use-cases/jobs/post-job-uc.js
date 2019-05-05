@@ -17,9 +17,6 @@ async function validate(payload) {
     description: Joi.string()
       .min(50)
       .required(),
-    tags: Joi.array()
-      .min(1)
-      .required(),
   };
 
   return Joi.validate(payload, schema);
@@ -35,9 +32,9 @@ async function postJobUC(jobInputData, authorization) {
 
   try {
     const jobPosted = await jobRepository.postJob(teamProfile, jobInputData);
-    const { jobId } = jobPosted;
+    const { jobId, title } = jobPosted;
 
-    await teamRepository.postJob(uuid, jobId);
+    await teamRepository.postJob(uuid, jobId, title);
     return null;
   } catch (err) {
     throw err;

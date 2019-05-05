@@ -19,7 +19,8 @@ cloudinary.config({
 
 async function uploadAvatarUC(file, authorization) {
   const { uuid, role } = await checkAuthorization(authorization);
-  await acceptOnlyRole(role, 'player');
+  await acceptOnlyRole(role, 'team');
+
 
   try {
     const { secure_url: avatarUrl } = await new Promise((resolve, reject) => {
@@ -40,6 +41,7 @@ async function uploadAvatarUC(file, authorization) {
       }).end(file.buffer);
     });
     await teamRepository.updateAvatar(avatarUrl, uuid);
+    console.log(avatarUrl);
     return avatarUrl;
   } catch (err) {
     throw new Error();

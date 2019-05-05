@@ -36,7 +36,6 @@ async function insertUserAccountInDB(userData) {
     },
     tags: [],
     avatarUrl: null,
-
     players: [],
   };
 
@@ -150,54 +149,43 @@ async function updateUserProfile(uuid, userData) {
   return null;
 }
 
-
-// const cloudName = process.env.CLOUDINARI_CLOUD_NAME;
-// const apiKey = process.env.CLOUDINARI_API_KEY;
-// const apiSecret = process.env.CLOUDINARI_API_SECRET;
-
-// cloudinary.config({
-//   cloud_name: cloudName,
-//   api_key: apiKey,
-//   api_secret: apiSecret,
-// });
-
-// async function updateAvatar(file, uuid) {
-//   if (!file.buffer) {
-//     throw new Error();
-//   }
-
-//   cloudinary.v2.uploader.upload_stream({
-//     resource_type: 'raw',
-//     public_id: uuid,
-//     width: 200,
-//     height: 200,
-//     format: 'jpg',
-//     crop: 'limit',
-//   }, async(err, result) => {
-//     if (err) {
-//       throw err;
-//     }
-
-//     const {
-//       secure_url: avatarUrl,
-//     } = result;
-
-//     const filter = {
-//       'accountInfo.uuid': uuid,
-//     };
-
-//     await TeamModel.updateOne(filter, { avatarUrl });
-//   }).end(file.buffer);
-// }
-
-async function postJob(uuid, jobId) {
+/**
+ * Save or update user avatar url into data base
+ *
+ * @param {String} avatarUrl - url where the avatar is located
+ * @param {string} uuid - Unique user identifier
+ * @returns {Object} null if everything is ok
+ */
+function updateAvatar(avatarUrl, uuid) {
   const filter = {
     'accountInfo.uuid': uuid,
   };
 
   const update = {
-    $push: { jobs: jobId },
+    $set: {
+      avatarUrl,
+    },
   };
+
+  TeamModel.updateOne(filter, update);
+  return null;
+}
+
+
+async function postJob(uuid, jobId, title) {
+  const filter = {
+    'accountInfo.uuid': uuid,
+  };
+
+  const update = {
+    $push: {
+      jobs: {
+        jobId,
+        title,
+      },
+    },
+  };
+
   await TeamModel.findOneAndUpdate(filter, update);
   return null;
 }
@@ -228,7 +216,7 @@ module.exports = {
   getUserAccountInfo,
   getProfile,
   updateUserProfile,
-  // updateAvatar,
+  updateAvatar,
   postJob,
   searchTeams,
 };

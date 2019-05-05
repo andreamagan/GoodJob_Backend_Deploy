@@ -42,6 +42,7 @@ async function insertUserAccountInDB(userData) {
       role,
     },
     tags: [],
+    jobs: [],
     avatarUrl: 'https://avatars.dicebear.com/v2/avataaars/44a11a4c6db67df7642a2172e27e3959.svg',
     team: null,
 
@@ -256,12 +257,17 @@ async function updateProfile(uuid, userData) {
  * @returns {Object} null if everything is ok
  */
 function updateAvatar(avatarUrl, uuid) {
-  console.log('repo', avatarUrl);
   const filter = {
     'accountInfo.uuid': uuid,
   };
 
-  PlayerModel.updateOne(filter, { avatarUrl });
+  const update = {
+    $set: {
+      avatarUrl,
+    },
+  };
+
+  PlayerModel.updateOne(filter, update);
   return null;
 }
 

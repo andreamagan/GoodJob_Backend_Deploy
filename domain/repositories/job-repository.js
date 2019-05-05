@@ -8,8 +8,8 @@ const JobModel = require('../../models/job-model');
 /**
  * Create a new job
  *
- * @param {Object} teamProfile Team profile data 
- * @param {Object} jobInputData 
+ * @param {Object} teamProfile Team profile data
+ * @param {Object} jobInputData
  * @returns {Object}
  */
 async function postJob(teamProfile, jobInputData) {
@@ -19,13 +19,12 @@ async function postJob(teamProfile, jobInputData) {
     .replace('T', ' ');
   const { title, description, tags } = jobInputData;
   const { nickName } = teamProfile.profileInfo;
-  const { teamUuid: uuid } = teamProfile;
-  const uuid = uuidV4();
-  console.log('_id', _id);
+  const { uuid } = teamProfile;
+  const Id = uuidV4();
 
   const jobData = {
-    team: _id,
-    jobId: `${nickName}_${uuid}`,
+    team: uuid,
+    jobId: `${nickName}_${Id}`,
     title,
     description,
     createdAt: now,

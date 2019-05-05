@@ -9,12 +9,12 @@ const acceptOnlyRole = require('../../sessions/accept-only-role-uc');
 async function validate(payload) {
   const schema = {
     profileInfo: ({
-      fullNameTeam: Joi.string().min(3).max(128).required(),
+      fullName: Joi.string().min(3).max(128).required(),
       nickName: Joi.string().max(3).required(),
       description: Joi.string().allow(null),
       social: ({
         twitterUrl: Joi.string().uri().allow(null),
-        twichUrl: Joi.string().uri().allow(null),
+        twitchUrl: Joi.string().uri().allow(null),
         instagramUrl: Joi.string().uri().allow(null),
         webUrl: Joi.string().uri().allow(null),
       }),

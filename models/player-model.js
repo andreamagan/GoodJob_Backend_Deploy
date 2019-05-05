@@ -53,7 +53,6 @@ playerSchema.index(
   {
     'profileInfo.fullName': 'text',
     'profileInfo.nickName': 'text',
-    'profileInfo.description': 'text',
     tags: 'text',
   },
 );
